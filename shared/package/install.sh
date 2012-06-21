@@ -152,7 +152,7 @@ function setup_django_every_time() {
     # Set up logging symlink
     ln -sf /var/log/apache2/error.log $GEONODE_LOG/apache.log
 
-    export DJANGO_SETTINGS_MODULE=geonode.settings
+    export DJANGO_SETTINGS_MODULE=uwinode.settings
     django-admin.py syncdb --noinput
     django-admin.py migrate --noinput
     django-admin.py collectstatic -v0 --noinput
