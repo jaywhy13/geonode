@@ -1,5 +1,6 @@
 import os
 import geonode
+import uwinode
 
 DEBUG = TEMPLATE_DEBUG = False
 
@@ -60,15 +61,18 @@ GEOSERVER_CREDENTIALS = 'geoserver', SECRET_KEY
 GOOGLE_API_KEY = ''
 
 GEONODE_ROOT = os.path.dirname(geonode.__file__)
+UWINODE_ROOT = os.path.dirname(uwinode.__file__)
 
 TEMPLATE_DIRS = (
     '/etc/geonode/templates',
+    os.path.join(UWINODE_ROOT, 'templates'),
     os.path.join(GEONODE_ROOT, 'templates'),
 )
 
 # Additional directories which hold static files
 STATICFILES_DIRS = [
     '/etc/geonode/media',
+    os.path.join(UWINODE_ROOT, 'static'),
     os.path.join(GEONODE_ROOT, 'static'),
 ]
 
