@@ -233,9 +233,7 @@ def setup_geonode_client(options):
     static = path("./src/GeoNodePy/geonode/static/geonode")
 
     with pushd("src/geonode-client/"):
-        # Ubuntu 12.04 has problems with maven calling ant and not 
-        # setting the JAVA_HOME correctly. Let's avoid that.
-        sh("ant zip")
+        sh("mvn clean compile")
     
     src_zip = "src/geonode-client/build/geonode-client.zip"
     zip_extractall(zipfile.ZipFile(src_zip), static)
@@ -402,8 +400,14 @@ def make_release(options):
 
         tar = tarfile.open("%s.tar.gz" % out_pkg, "w:gz")
         for file in out_pkg.walkfiles():
+            #print "Adding file %s to tar " % file
             tar.add(file)
+<<<<<<< HEAD
+        #exit
+        tar.add('../README.release.rst', arcname=('%s/README.rst' % out_pkg))
+=======
         tar.add('README.release.rst', arcname=('%s/README.rst' % out_pkg))
+>>>>>>> 80f58dc31b49afef7cb7f2342c933dc22466546c
         tar.close()
 
         out_pkg.rmtree()
