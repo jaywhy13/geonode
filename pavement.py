@@ -411,8 +411,10 @@ def make_release(options):
         
         if extra_pkg_tree:
             with pushd(extra_pkg_tree):
-                for file in path("./package"):
-                    tar.add(file)
+                for file in path(".").walkfiles():
+                    filename = str(file).replace("./","") # I don't like how "./filename" looks
+                    fullname = "%s/%s" % (pkgname, filename)
+                    tar.add(file, fullname) # hmmm..  any side effects? Adding the same file twice
 
         tar.add('./README.release.rst', arcname=('%s/README.rst' % out_pkg))
         tar.close()
