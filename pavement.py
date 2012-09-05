@@ -409,7 +409,7 @@ def make_release(options):
             #print "Adding file %s to tar " % file
             tar.add(file)
 
-        tar.add('../README.release.rst', arcname=('%s/README.rst' % out_pkg))
+        tar.add('./README.release.rst', arcname=('%s/README.rst' % out_pkg))
         tar.close()
 
         out_pkg.rmtree()
