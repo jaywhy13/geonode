@@ -377,6 +377,7 @@ def setup_jetty(source, dest):
     ('no_svn', 'D', 'Do not append svn version number as part of name '),
     ('append_to=', 'a', 'append to release name'),
     ('skip_packaging', 'y', 'Do not call package_all when creating a release'),
+    ('pkg_tree=', 't', 'Use this pkg tree')
 ])
 def make_release(options):
     """
@@ -393,21 +394,22 @@ def make_release(options):
         if hasattr(options, 'append_to'):
             pkgname += options.append_to
 
+    if not hasattr(options, 'pkg_tree'):
+        pkg_tree = "./package"
+    else:
+        pkg_tree = options.pkg_tree
+
     with pushd('shared'):
         out_pkg = path(pkgname)
         out_pkg.rmtree()
-        path('./package').copytree(out_pkg)
+        path(pkg_tree).copytree(out_pkg)
 
         tar = tarfile.open("%s.tar.gz" % out_pkg, "w:gz")
         for file in out_pkg.walkfiles():
             #print "Adding file %s to tar " % file
             tar.add(file)
-<<<<<<< HEAD
-        #exit
+
         tar.add('../README.release.rst', arcname=('%s/README.rst' % out_pkg))
-=======
-        tar.add('README.release.rst', arcname=('%s/README.rst' % out_pkg))
->>>>>>> 80f58dc31b49afef7cb7f2342c933dc22466546c
         tar.close()
 
         out_pkg.rmtree()
