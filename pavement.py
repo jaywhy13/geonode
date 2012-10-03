@@ -233,7 +233,7 @@ def setup_geonode_client(options):
     static = path("./src/GeoNodePy/geonode/static/geonode")
 
     with pushd("src/geonode-client/"):
-        sh("mvn clean compile")
+        sh("ant zip") # BUG --> this doesn't work on Ubuntu 12.04 # sh("mvn clean compile")
     
     src_zip = "src/geonode-client/build/geonode-client.zip"
     zip_extractall(zipfile.ZipFile(src_zip), static)
