@@ -21,6 +21,7 @@ django-taggit==0.9.3
 
 ### We need these for uwinode, uncomment to enable them
 ### then re-run pip install -r shared/requirements.txt
-#-e git+https://github.com/jaywhy13/mynode.git#egg=mynode
+#-e git+https://github.com/jaywhy13/uwinode.git#egg=uwinode
 #django-disqus
-
+#googlemaps
+#django-forms-bootstrap
